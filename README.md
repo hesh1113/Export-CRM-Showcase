@@ -111,8 +111,8 @@ flowchart LR
   would otherwise cascade-delete it.
 - **Releases with a way back.** A deploy script (check, deploy, rollback) refuses to run if server code was edited,
   runs Composer only when needed, and finishes with a health check that proves private files are not reachable.
-- **Tested like each user.** About 235 scripted checks ran as each of the four roles on a dummy-data copy (including
-  the refusals), which found and fixed real defects before launch.
+- **Tested like each user.** More than 200 scripted checks ran as each of the four roles on a dummy-data copy,
+  including the refusals (what each role is not allowed to do).
 - **Rules written down.** A business-rules and approval matrix, a methodology note for the scoring and KPI formulas,
   user manuals per role and a practice test pack were delivered with the system.
 
@@ -132,8 +132,8 @@ classification logic, the web interface and role permissions, the production dep
   migrations as numbered files made big clean-ups safe.
 - **Deployment is part of the job.** Serving only a `public/` folder, a read-only deploy key, a deploy script with
   rollback and health checks, and verifying that sensitive URLs return 403/404.
-- **Test as every role, not only as admin.** Walking through the system as each user type found a button shown to a
-  role that was then refused, and a download link that did nothing.
+- **Test as every role, not only as admin.** Walking through the system as each user type shows what each person
+  really sees, and what the system refuses them.
 - **A system is not done until people can use it.** Manuals, a one-page explanation and a practice test matter as much
   as the code.
 
