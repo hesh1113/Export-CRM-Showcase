@@ -24,7 +24,7 @@ AI assistant that reads each incoming email so people don't have to re-type it.
 
 - **Reads Gmail automatically.** Shared and personal inboxes are watched through a Google service account
   with domain-wide delegation, every five minutes. New mail becomes a lead, and replies are added to the right
-  conversation by Gmail thread. The system only reads and labels mail: it cannot send email to customers.
+  conversation by Gmail thread. The system only reads and labels mail: nothing in it sends email to customers.
 - **Filters junk before it reaches a person.** A rule-based spam score and Gemini AI classify each email as a
   genuine buyer inquiry, not an inquiry (spam, supplier pitches, phishing) or uncertain. Uncertain mail goes to a
   **Needs Review** queue where the head of department confirms or dismisses it, instead of being guessed either way.
@@ -106,6 +106,11 @@ flowchart LR
   anywhere until someone sets its status, and every AI call has a rule-based fallback so mail is never blocked.
 - **Safe by layout.** Only a `public/` folder is served; code, config and uploads sit above it. Secrets in the database
   are encrypted (AES-256-GCM), every form carries a CSRF token, and all queries are prepared statements.
+- **Sessions and files that cannot be abused.** A sign-in ends after 30 minutes without a click and after 12 hours in all, enforced on the
+  server whatever the browser does with its cookie. Attachments from outside senders are shown in the browser only when they really are
+  PDFs or ordinary pictures; everything else downloads. Pages send anti-framing, no-sniff and no-cache headers.
+- **Security tested, not assumed.** About 60 scripted security checks (sign-in, access control, injection, files, headers) are run on a
+  dummy-data copy before each release, and a short read-only check is made on the live address afterwards.
 - **Accounts that cannot hurt you.** Users are re-checked on every request (a disabled person is signed out at
   once), temporary passwords force a change, and deleting a user detaches their history first because the database
   would otherwise cascade-delete it.
